@@ -10,3 +10,5 @@ To run bottle server:
 
 ```
 
+To start, run localhost:8080/simulate on browser
+
