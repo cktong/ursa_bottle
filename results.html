@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Simulate Test</title>
+        <script type="text/javascript" src="d3.v3.js"></script>
+        <script type="text/javascript" src="jquery-1.10.2.js"></script>
+        <style type="text/css">
+          rect:hover {
+            fill: orange;
+          }
+        </style>        
+    </head>
+
+    <body>
+    	<h1> Hello {{name}}</h1>
+      <table>
+          <tr>
+              <td id="iv_sum"><button>iv_sum</button></td>
+              <td id="iv_mean"><button>iv_mean</button></td>
+              <td id="is_residential"><button>is_residential</button></td>
+          </tr>
+      </table>
+    	<script type="text/javascript">
+    		//Width and height
+			var w = 1000;
+			var h = 700;
+
+			var dataset = {{!data}}
+			// var topic = ['residental', 'non-residential'];
+
+
+      var svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+      var xScale = d3.scale.ordinal()
+        .domain(d3.range(dataset.length))
+        .rangeRoundBands([0, w], 0.05);
+
+      var yScale = d3.scale.linear()
+        .domain([0, d3.max(dataset, function(d) { return d.iv_sum; })])
+        .range([5, h]);
+
+              //Define sort order flag
+      var sortOrder = false;
+      
+      //Define sort function
+      var sortBars = function() {
+
+        //Flip value of sortOrder
+        sortOrder = !sortOrder;
+
+        svg.selectAll("rect")
+           .sort(function(a, b) {
+              if (sortOrder) {
+                return d3.ascending(a[buttonID], b[buttonID]);
+              } else {
+                return d3.descending(a[buttonID], b[buttonID]);
+              }
+            })
+           .transition()
+           .delay(function(d, i) {
+             return i * 50;
+           })
+           .duration(1000)
+           .attr("x", function(d, i) {
+              return xScale(i);
+           });
+
+      }; 
+
+      //Create bars
+      svg.selectAll("rect")
+         .data(dataset)
+         .enter()
+         .append("rect")
+         .attr("x", function(d, i) {
+              return xScale(i);
+         })
+         .attr("y", function(d) {
+              return h - yScale(d.iv_sum);
+         })
+         .attr("width", xScale.rangeBand())
+         .attr("height", function(d) {
+              return yScale(d.iv_sum);
+         })
+         .attr("fill", function(d) {
+              return "rgb(0, 0, " + Math.round(d.iv_sum * 50) + ")";
+         })
+         .on("click", function() {
+            sortBars();
+         }) 
+         .append("title")
+           .text(function(d) {
+              return d.building_type_name;
+         });
+
+      var buttonID = "iv_sum"
+
+      d3.selectAll("td")
+        .on("click", function() {
+
+          buttonID = d3.select(this).attr("id");
+
+    			var yScale = d3.scale.linear()
+    				.domain([0, d3.max(dataset, function(d) { return d[buttonID]; })])
+    				.range([0, h]);
+
+          //Create bars
+          svg.selectAll("rect")
+             .data(dataset)
+             .transition()
+             .attr("x", function(d, i) {
+                  return xScale(i);
+             })
+             .attr("y", function(d) {
+                  return h - yScale(d[buttonID]);
+             })
+             .attr("width", xScale.rangeBand())
+             .attr("height", function(d) {
+                  return yScale(d[buttonID]);
+             })
+             .attr("fill", function(d) {
+                  return "rgb(0, 0, " + Math.round(d[buttonID] * 50) + ")";
+             })
+          }); 
+
+    	</script>
+    </body>
+</html>

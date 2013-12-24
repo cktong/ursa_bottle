@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <title>Urban Spatial Analysis Portal</title>
+
+    <link rel="stylesheet" href="css/nv.d3.css"/>
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+    <link href="./css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./css/ui-lightness/jquery-ui-1.10.0.custom.min.css" rel="stylesheet">
+
+    <link href="./css/base-admin-3.css" rel="stylesheet">
+    <link href="./css/base-admin-3-responsive.css" rel="stylesheet">
+
+    <link href="./css/custom.css" rel="stylesheet">
+
+    <link href="js/plugins/msgGrowl/css/msgGrowl.css" rel="stylesheet">
+
+</head>
+<body>
+
+
+
+<script type="text/x-handlebars">
+
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="icon-cog"></i>
+            </button>
+            <a class="navbar-brand" href="./index.html">Synthicity URSA</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="javscript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-cog"></i>
+                        Settings
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./account.html">Account Settings</a></li>
+                        <li><a href="javascript:;">Privacy Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:;">Help</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="javscript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-user"></i>
+                        Fletcher Foti
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:;">My Profile</a></li>
+                        <li><a href="javascript:;">My Groups</a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:;">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm search-query" placeholder="Search">
+                </div>
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div> <!-- /.container -->
+</nav>
+
+
+<div class="subnavbar">
+    <div class="subnavbar-inner">
+        <div class="container">
+            <a href="javascript:;" class="subnav-toggle" data-toggle="collapse" data-target=".subnav-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="icon-reorder"></i>
+            </a>
+
+            <div class="collapse subnav-collapse">
+                <ul class="mainnav">
+                    {{#link-to 'index' tagName="li"}}
+                    <a href="">
+                        <i class="icon-home"></i>
+                        <span>Home</span>
+                    </a>
+                    {{/link-to}}
+
+                    {{#link-to 'charts' tagName="li"}}
+                    <a href="">
+                        <i class="icon-th"></i>
+                        <span>Edit Charts</span></a>
+                    {{/link-to}}
+
+                    {{#link-to 'display' tagName="li"}}<a href="">
+                    <i class="icon-copy"></i>
+                    <span>Reports</span></a>
+                    {{/link-to}}
+
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-external-link"></i>
+                            <span>Extra Pages</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./login.html">Login</a></li>
+                            <li><a href="./signup.html">Signup</a></li>
+                            <li><a href="./error.html">Error</a></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">More options</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="#">Second level</a></li>
+
+                                    <li><a href="#">Second level</a></li>
+                                    <li><a href="#">Second level</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> <!-- /.subnav-collapse -->
+        </div> <!-- /container -->
+    </div> <!-- /subnavbar-inner -->
+</div> <!-- /subnavbar -->
+
+{{outlet}}
+
+<div class="extra">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="javascript:;">About Us</a></li>
+                    <li><a href="javascript:;">Twitter</a></li>
+                    <li><a href="javascript:;">Facebook</a></li>
+                    <li><a href="javascript:;">Google+</a></li>
+                </ul>
+            </div> <!-- /span3 -->
+
+            <div class="col-md-3">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="javascript:;">Frequently Asked Questions</a></li>
+                    <li><a href="javascript:;">Ask a Question</a></li>
+                    <li><a href="javascript:;">Video Tutorial</a></li>
+                    <li><a href="javascript:;">Feedback</a></li>
+                </ul>
+            </div> <!-- /span3 -->
+
+            <div class="col-md-3">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="javascript:;">License</a></li>
+                    <li><a href="javascript:;">Terms of Use</a></li>
+                    <li><a href="javascript:;">Privacy Policy</a></li>
+                    <li><a href="javascript:;">Security</a></li>
+                </ul>
+            </div> <!-- /span3 -->
+
+            <div class="col-md-3">
+                <h4>Settings</h4>
+                <ul>
+                    <li><a href="javascript:;">Consectetur adipisicing</a></li>
+                    <li><a href="javascript:;">Eiusmod tempor </a></li>
+                    <li><a href="javascript:;">Fugiat nulla pariatur</a></li>
+                    <li><a href="javascript:;">Officia deserunt</a></li>
+                </ul>
+            </div> <!-- /span3 -->
+        </div> <!-- /row -->
+    </div> <!-- /container -->
+</div> <!-- /extra -->
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div id="footer-copyright" class="col-md-6">
+                &copy; 2013 Synthicity
+            </div> <!-- /span6 -->
+            <div id="footer-terms" class="col-md-6">
+                URSA developed by <a href="http://synthicity.com" target="_blank">Synthicity, Inc.</a>
+            </div> <!-- /.span6 -->
+        </div> <!-- /row -->
+    </div> <!-- /container -->
+</div> <!-- /footer -->
+
+</script>
+
+
+<script type="text/x-handlebars" id="index">
+<div class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-6 col-xs-12">
+    <div class="widget widget-nopad stacked">
+        <div class="widget-header">
+            <i class="icon-list-alt"></i>
+            <h3>Recent News</h3>
+        </div> <!-- /widget-header -->
+        <div class="widget-content">
+            <ul class="news-items">
+                <li>
+                    <div class="news-item-detail">
+                        <a href="javascript:;" class="news-item-title">Duis aute irure dolor in reprehenderit</a>
+                        <p class="news-item-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    </div>
+                    <div class="news-item-date">
+                        <span class="news-item-day">08</span>
+                        <span class="news-item-month">Mar</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="news-item-detail">
+                        <a href="javascript:;" class="news-item-title">Duis aute irure dolor in reprehenderit</a>
+                        <p class="news-item-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    </div>
+
+                    <div class="news-item-date">
+                        <span class="news-item-day">08</span>
+                        <span class="news-item-month">Mar</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="news-item-detail">
+                        <a href="javascript:;" class="news-item-title">Duis aute irure dolor in reprehenderit</a>
+                        <p class="news-item-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    </div>
+
+                    <div class="news-item-date">
+                        <span class="news-item-day">08</span>
+                        <span class="news-item-month">Mar</span>
+                    </div>
+                </li>
+            </ul>
+        </div> <!-- /widget-content -->
+    </div> <!-- /widget -->
+
+    <div class="widget stacked">
+        <div class="widget-header">
+            <i class="icon-file"></i>
+            <h3>Content</h3>
+        </div> <!-- /widget-header -->
+        <div class="widget-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div> <!-- /widget-content -->
+    </div> <!-- /widget -->
+</div> <!-- /span6 -->
+
+<div class="col-md-6">
+    <div class="widget stacked">
+        <div class="widget-header">
+            <i class="icon-bookmark"></i>
+            <h3>Quick Shortcuts</h3>
+        </div> <!-- /widget-header -->
+        <div class="widget-content">
+            <div class="shortcuts">
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-list-alt"></i>
+                    <span class="shortcut-label">Apps</span>
+                </a>
+
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-bookmark"></i>
+                    <span class="shortcut-label">Bookmarks</span>
+                </a>
+
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-signal"></i>
+                    <span class="shortcut-label">Reports</span>
+                </a>
+
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-comment"></i>
+                    <span class="shortcut-label">Comments</span>
+                </a>
+
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-user"></i>
+                    <span class="shortcut-label">Users</span>
+                </a>
+
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-file"></i>
+                    <span class="shortcut-label">Notes</span>
+                </a>
+
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-picture"></i>
+                    <span class="shortcut-label">Photos</span>
+                </a>
+
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-tag"></i>
+                    <span class="shortcut-label">Tags</span>
+                </a>
+            </div> <!-- /shortcuts -->
+        </div> <!-- /widget-content -->
+    </div> <!-- /widget -->
+
+    <div class="widget stacked widget-table action-table">
+        <div class="widget-header">
+            <i class="icon-th-list"></i>
+            <h3>Table</h3>
+        </div> <!-- /widget-header -->
+        <div class="widget-content">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Engine</th>
+                    <th>Browser</th>
+                    <th class="td-actions"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 4.0</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-xs btn-primary">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.0</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-xs btn-primary">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.5</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-xs btn-primary">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.5</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-xs btn-primary">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.5</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-xs btn-primary">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.5</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-xs btn-primary">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div> <!-- /widget-content -->
+    </div> <!-- /widget -->
+</div> <!-- /span6 -->
+</div> <!-- /row -->
+</div> <!-- /container -->
+</div> <!-- /main -->
+</script>
+
+
+
+<script>
+    /*
+     =========================================================
+     =========================================================
+     THIS IS WHERE THE REAL CODE BEGINS!!
+     TODO
+     Add different kinds of nvd3 charts and make configurable
+     Allow configuration of scenarios
+     Auto-complete
+     Simple Hedonic
+     Figure out how to do login
+     =========================================================
+     =========================================================
+     */
+</script>
+
+
+
+<!-- this is the outer wrapper on the charts page -->
+<script type="text/x-handlebars" id="charts">
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <table class='table'>
+                        <thead>
+                        <tr><th>Available charts:</th></tr>
+                        </thead>
+                        {{#each model}}
+                        <tr><td>
+                            {{#link-to 'chart' this}}{{desc}} <small class='muted'>on {{table}}</small>{{/link-to}}
+                        </td></tr>
+                        {{/each}}
+                        <tr><td>
+                            <button class="btn btn-default" {{action 'newChart'}}>Create new</button>
+                        </td></tr>
+                    </table>
+                </div>
+                <div class="col-md-8">
+                    {{outlet}}
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+
+<!-- default dropin on the charts page -->
+<script type="text/x-handlebars" id="charts/index">
+    <div class="widget stacked widget-table action-table">
+        <div class="widget-header">
+            <i class="icon-th-list"></i>
+            <h3>Available Chart Details</h3>
+        </div> <!-- /widget-header -->
+        <div class="widget-content">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Description</th>
+                    <th>Table</th>
+                    <th>Metric</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each model}}
+                <tr>
+                    <td>
+                        {{#link-to 'chart' this}}View{{/link-to}}
+                    </td>
+                    <td>{{desc}}</td>
+                    <td>{{table}}</td>
+                    <td>{{metric}}</td>
+                    <td>
+                        <a href="#" {{action 'deleteChart' id}}>Delete</button>
+                    </td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div> <!-- /widget-content -->
+    </div> <!-- /widget -->
+</script>
+
+
+
+<!-- the chart on the charts page -->
+<script type="text/x-handlebars" id="chart">
+    <h4>Description for SQL query: {{desc}}</h4>
+    <hr>
+    <b>Table:</b> {{table}}<br>
+    {{#if filter}}<b>Apply filter:</b> {{filter}}<br>{{/if}}
+    <b>Metric:</b> {{metric}}<br>
+    <b>Group by:</b> {{groupby}},
+    {{#if limit}}<b>Limit:</b> {{limit}},{{/if}}
+    <b>Sort:</b> {{sort}},
+    <b>Descending:</b> {{orderdesc}}
+    <b>Parcel join:</b> {{jointoparcels}},
+    <br>
+
+    {{#if isEditing}}
+    <hr>
+    {{partial 'chart/edit'}}
+    <button class="btn btn-default" {{action 'saveLocally' id}}>Save locally</button>
+    <button class="btn btn-default" {{action 'saveToDB' id}}>Save to database</button>
+    {{else}}
+    <button class="btn btn-default" {{action 'edit'}}>Edit this chart</button>
+    <hr>
+    {{partial 'dthree-chart'}}
+    {{/if}}
+</script>
+
+
+
+<!-- this is the partial for the actual nvd3 chart -->
+<script type="text/x-handlebars" id="dthree-chart">
+    <div class="widget stacked">
+        <div class="widget-header">
+            <i class="icon-bar-chart"></i>
+            <h3>{{desc}}</h3>
+        </div>
+        <!-- /widget-header -->
+        <div class="widget-content">
+            {{view App.MyChartView gno=id store=store}}
+        </div><!-- /area-chart -->
+    </div><!-- /widget-content -->
+</script>
+
+
+
+<!-- html to edit the chart configuration -->
+<script type="text/x-handlebars" id="chart/_edit">
+    <table>
+        <tr><td class="topRight">Enter table to search:</td><td>{{input class="form-control" size=25 type="text" value=table}}</td></tr>
+        <tr><td class="topRight">Enter chart description:</td><td>{{textarea class="form-control" cols=49 rows=4 value=desc}}</td></tr>
+        <tr><td class="topRight">Filter to apply:</td><td>{{textarea class="form-control" cols=49 rows=4 value=filter}}</td></tr>
+        <tr><td class="topRight">Enter metric to compute:</td><td>{{input class="form-control" size=25 value=metric}}</td></tr>
+        <tr><td class="topRight">Group by field:</td><td>{{input class="form-control" size=25 type="text" value=groupby}}</td></tr>
+        <tr><td class="topRight">Limit to number of results:</td><td>{{input class="form-control" size=25 type="text" value=limit}}</td></tr>
+        <tr><td class="topRight">Port:</td><td>{{input class="form-control" size=25 type="text" value=port}}</td></tr>
+        <tr><td align="topRight">Merge with parcels:</td><td>{{input type="checkbox" class="toggle" checked=jointoparcels}}</td></tr>
+        <tr><td class="topRight">Sort:</td><td>{{input type="checkbox" class="toggle" checked=sort}}</td></tr>
+        <tr><td class="topRight">Descending:</td><td>{{input type="checkbox" class="toggle" checked=orderdesc}}</td></tr>
+    </table>
+</script>
+
+
+
+<!-- this is the outer wrapper on the display page -->
+<script type="text/x-handlebars" id="display">
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4" align="center">
+                    <h1>Baseline</h1>
+                </div>
+                <div class="col-md-4" align="center">
+                    <h1>S0</h1>
+                </div>
+                <div class="col-md-4" align="center">
+                    <h1>S1</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            {{#each filteredContent}}
+            <div class="row">
+                <div class="col-md-4">
+                    {{view App.MyColumnView columnno=1}}
+                </div>
+                <div class="col-md-4">
+                    {{view App.MyColumnView columnno=2}}
+                </div>
+                <div class="col-md-4">
+                    {{view App.MyColumnView columnno=3}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+
+
+<script src="js/libs/jquery-1.10.2.js"></script>
+<script src="js/libs/handlebars-1.1.2.js"></script>
+<script src="js/libs/ember-1.2.0.js"></script>
+<script src="js/libs/ember-data.js"></script>
+
+<script src="js/libs/ember-couchdb-kit/ember-couchdb-kit.js"></script>
+<script src="js/libs/ember-couchdb-kit/attachment-adapter.js"></script>
+<script src="js/libs/ember-couchdb-kit/changes-feed.js"></script>
+<script src="js/libs/ember-couchdb-kit/document-adapter.js"></script>
+<script src="js/libs/ember-couchdb-kit/registry.js"></script>
+<script src="js/libs/ember-couchdb-kit/revs-adapter.js"></script>
+
+<script src="js/app.js"></script>
+<script src="./js/libs/bootstrap.min.js"></script>
+<script src="./js/libs/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="js/libs/d3.v3.js"></script>
+<script src="js/libs/nv.d3.js"></script>
+<script src="js/plugins/msgGrowl/js/msgGrowl.js"></script>
+
+</body>
+</html>
